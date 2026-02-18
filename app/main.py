@@ -1,10 +1,14 @@
+
 from fastapi import FastAPI
 from app.api.router import router
-app = FastAPI(title = "HR AI Assistant API", version = "1.0")
 
- 
-
+app = FastAPI()
 app.include_router(router)
-@app.get("/")
-def root():
-    return {"message": "GenAI API is running 🚀"}
+
+# Optional: allow running Gradio UI for local testing
+def run_gradio():
+    from app.ui.gradio_ui import launch_ui
+    launch_ui()
+
+if __name__ == "__main__":
+    run_gradio()

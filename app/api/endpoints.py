@@ -1,11 +1,23 @@
 from fastapi import Body
 from app.services.document_loader import load_hr_documents
 
-async def chat_endpoint(message: str = Body(..., embed=True)):
-    return {
-        "input": message,
-        "response": f"You said: {message}"
-    }
+
+from app.services.rag_service import get_rag_chain
+from fastapi import Body
+from fastapi import APIRouter
+from fastapi.responses import JSONResponse
+import logging
+
+
+qa = get_rag_chain()
+def chat_endpoint(message: str = Body(..., embed=True)):
+    try:
+        result = qa.invoke({"question": message})
+        logging.warning(f"[DEBUG] qa.invoke output type: {type(result)}, value: {result}")
+        return {"response": str(result)}
+    except Exception as e:
+        logging.error(f"[ERROR] Exception in chat_endpoint: {e}")
+        return JSONResponse(status_code=500, content={"error": str(e)})
 
 async def health_check():
     return {"status": "Healthy ✅"}
