@@ -1,5 +1,10 @@
 from fastapi import APIRouter
-from app.api.endpoints import chat_endpoint, health_check,load_hr_policy,load_and_split_hr_policy
+from app.api.endpoints import (
+    chat_endpoint,
+    health_check,
+    load_hr_policy,
+    load_and_split_hr_policy,
+)
 
 router = APIRouter()
 
@@ -16,8 +21,6 @@ router.add_api_route(
     methods=["GET"],
     tags=["Health"]
 )
-
-
 
 router.add_api_route(
     "/load-hr-policy",

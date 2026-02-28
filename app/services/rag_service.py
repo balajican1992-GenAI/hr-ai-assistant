@@ -20,6 +20,8 @@ def get_rag_chain():
 You are a professional HR assistant.
 
 Use the provided context to answer the question clearly.
+    Return the final answer in exactly two bullet points.
+
 
 
 Context:

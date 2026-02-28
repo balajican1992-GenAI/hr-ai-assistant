@@ -16,9 +16,9 @@ def test_embedding_and_vectorstore():
     embeddings = get_embedding_model()
     print("Embedding model loaded ✅")
 
-    print("Connecting to MongoDB vector store...")
+    print("Creating/loading FAISS vector store...")
     vector_store = get_vector_store()
-    print("Vector store connected ✅")
+    print("FAISS vector store ready ✅")
 
     print("Storing chunks into vector store...")
     try:
